@@ -1,0 +1,33 @@
+
+myproductsdb> db.products.find()
+[
+  {
+    _id: ObjectId('6757ac94cad39caeb786b01d'),
+    pname: 'Samsung ultra S24',
+    price: 130000,
+    rating: 4.5,
+    inStock: true
+  },
+  {
+    _id: ObjectId('6757acddcad39caeb786b01e'),
+    pname: 'Vivo S29',
+    price: 30000,
+    rating: 4.2,
+    inStock: true
+  },
+  {
+    _id: ObjectId('6757acf6cad39caeb786b01f'),
+    pname: 'Iphone 16',
+    price: 80000,
+    rating: 4.7,
+    inStock: false
+  },
+  {
+    _id: ObjectId('6757ad07cad39caeb786b020'),
+    pname: 'Iphone 16 Pro Max',
+    price: 180000,
+    rating: 4.8,
+    inStock: false
+  }
+]
+myproductsdb>
