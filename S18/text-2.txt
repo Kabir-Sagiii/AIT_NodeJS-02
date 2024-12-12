@@ -1,0 +1,356 @@
+
+test> use aitrelationdb
+switched to db aitrelationdb
+aitrelationdb> db.createCollection("basicinfo")
+{ ok: 1 }
+aitrelationdb> db.createCollection("contactinfo")
+{ ok: 1 }
+aitrelationdb> db.basicinfo.insertMany([{name:"shiva",gender:"male",city:"hyd"},{name:"shree",gender:"male",city:"pune"},{name:"priya",gender:"female",city:"banglore"},{name:"riya",gender:"female",city:"mumbai"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('675a4f0e40ebedf6a586b01d'),
+    '1': ObjectId('675a4f0e40ebedf6a586b01e'),
+    '2': ObjectId('675a4f0e40ebedf6a586b01f'),
+    '3': ObjectId('675a4f0e40ebedf6a586b020')
+  }
+}
+aitrelationdb> db.contactinfo.insertMany([{email:"shiva@gmail.com",phone:9999999999},{email:"shree@gmail.com",phone:8888888888},{email:"priya@gmail.com",phone:77777777777},{email:"riya@gmail.com",phone:6666666666}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('675a4fa840ebedf6a586b021'),
+    '1': ObjectId('675a4fa840ebedf6a586b022'),
+    '2': ObjectId('675a4fa840ebedf6a586b023'),
+    '3': ObjectId('675a4fa840ebedf6a586b024')
+  }
+}
+aitrelationdb> db.basicinfo.updateOne({name:"shiva"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b021')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.find()
+[
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01d'),
+    name: 'shiva',
+    gender: 'male',
+    city: 'hyd',
+    contactId: ObjectId('675a4fa840ebedf6a586b021')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01e'),
+    name: 'shree',
+    gender: 'male',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01f'),
+    name: 'priya',
+    gender: 'female',
+    city: 'banglore'
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b020'),
+    name: 'riya',
+    gender: 'female',
+    city: 'mumbai'
+  }
+]
+aitrelationdb> db.contactinfo.find()
+[
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b021'),
+    email: 'shiva@gmail.com',
+    phone: 9999999999
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b022'),
+    email: 'shree@gmail.com',
+    phone: 8888888888
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b023'),
+    email: 'priya@gmail.com',
+    phone: 77777777777
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b024'),
+    email: 'riya@gmail.com',
+    phone: 6666666666
+  }
+]
+aitrelationdb> db.basicinfo.updateOne({name:"shree"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b022')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.updateOne({name:"priya"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b023')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.updateOne({name:"riya"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b024')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.find()
+[
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01d'),
+    name: 'shiva',
+    gender: 'male',
+    city: 'hyd',
+    contactId: ObjectId('675a4fa840ebedf6a586b021')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01e'),
+    name: 'shree',
+    gender: 'male',
+    city: 'pune',
+    contactId: ObjectId('675a4fa840ebedf6a586b022')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01f'),
+    name: 'priya',
+    gender: 'female',
+    city: 'banglore',
+    contactId: ObjectId('675a4fa840ebedf6a586b023')
+  },
+
+aitrelationdb> db.createCollection("posts")
+{ ok: 1 }
+aitrelationdb> db.createCollection("comments")
+{ ok: 1 }
+aitrelationdb> db.posts.insertOne({title:"post1",author:"Raj"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('675a54ad40ebedf6a586b025')
+}
+aitrelationdb> db.posts.insertOne({title:"post2",author:"Rohan"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('675a54b840ebedf6a586b026')
+}
+aitrelationdb> db.posts.insertOne({title:"post3",author:"Sneha"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('675a54c140ebedf6a586b027')
+}
+aitrelationdb> db.posts.insertOne({title:"post4",author:"Ayan"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('675a54cf40ebedf6a586b028')
+}
+aitrelationdb> db.comments.insertOne({_id:101,comment:"comment-1",author:"user1"})
+{ acknowledged: true, insertedId: 101 }
+aitrelationdb> db.comments.insertOne({_id:102,comment:"comment-2",author:"user2"})
+{ acknowledged: true, insertedId: 102 }
+aitrelationdb> db.comments.insertOne({_id:103,comment:"comment-3",author:"user3"})
+{ acknowledged: true, insertedId: 103 }
+aitrelationdb> db.comments.insertOne({_id:104,comment:"comment-4",author:"user4"})
+{ acknowledged: true, insertedId: 104 }
+aitrelationdb> db.comments.insertOne({_id:105,comment:"comment-5",author:"user5"})
+{ acknowledged: true, insertedId: 105 }
+aitrelationdb> db.comments.insertOne({_id:106,comment:"comment-6",author:"user6"})
+{ acknowledged: true, insertedId: 106 }
+aitrelationdb> db.comments.insertOne({_id:107,comment:"comment-7",author:"user7"})
+{ acknowledged: true, insertedId: 107 }
+aitrelationdb> db.comments.insertOne({_id:108,comment:"comment-8",author:"user8"})
+{ acknowledged: true, insertedId: 108 }
+aitrelationdb> db.comments.find()
+[
+  { _id: 101, comment: 'comment-1', author: 'user1' },
+  { _id: 102, comment: 'comment-2', author: 'user2' },
+  { _id: 103, comment: 'comment-3', author: 'user3' },
+  { _id: 104, comment: 'comment-4', author: 'user4' },
+  { _id: 105, comment: 'comment-5', author: 'user5' },
+  { _id: 106, comment: 'comment-6', author: 'user6' },
+  { _id: 107, comment: 'comment-7', author: 'user7' },
+  { _id: 108, comment: 'comment-8', author: 'user8' }
+]
+aitrelationdb> db.posts.find()
+[
+  {
+    _id: ObjectId('675a54ad40ebedf6a586b025'),
+    title: 'post1',
+    author: 'Raj'
+  },
+  {
+    _id: ObjectId('675a54b840ebedf6a586b026'),
+    title: 'post2',
+    author: 'Rohan'
+  },
+  {
+    _id: ObjectId('675a54c140ebedf6a586b027'),
+    title: 'post3',
+    author: 'Sneha'
+  },
+  {
+    _id: ObjectId('675a54cf40ebedf6a586b028'),
+    title: 'post4',
+    author: 'Ayan'
+  }
+]
+aitrelationdb> db.posts.updateOne({author:"Raj"},{$set:{comments:[101,103,108]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:101},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.find()
+[
+  { _id: 101, comment: 'comment-1', user: 'user1' },
+  { _id: 102, comment: 'comment-2', author: 'user2' },
+  { _id: 103, comment: 'comment-3', author: 'user3' },
+  { _id: 104, comment: 'comment-4', author: 'user4' },
+  { _id: 105, comment: 'comment-5', author: 'user5' },
+  { _id: 106, comment: 'comment-6', author: 'user6' },
+  { _id: 107, comment: 'comment-7', author: 'user7' },
+  { _id: 108, comment: 'comment-8', author: 'user8' }
+]
+aitrelationdb> db.comments.updateOne({_id:102},{$rename:{author:user}})
+ReferenceError: user is not defined
+aitrelationdb> db.comments.updateOne({_id:102},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:103},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:104},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:105},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:106},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:107},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.updateOne({_id:108},{$rename:{author:"user"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.comments.find()
+[
+  { _id: 101, comment: 'comment-1', user: 'user1' },
+  { _id: 102, comment: 'comment-2', user: 'user2' },
+  { _id: 103, comment: 'comment-3', user: 'user3' },
+  { _id: 104, comment: 'comment-4', user: 'user4' },
+  { _id: 105, comment: 'comment-5', user: 'user5' },
+  { _id: 106, comment: 'comment-6', user: 'user6' },
+  { _id: 107, comment: 'comment-7', user: 'user7' },
+  { _id: 108, comment: 'comment-8', user: 'user8' }
+]
+aitrelationdb> db.posts.updateOne({author:"Rohan"},{$set:{comments:[102,104]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.posts.updateOne({author:"Sneha"},{$set:{comments:[105]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.posts.updateOne({author:"Ayan"},{$set:{comments:[106,107]}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.posts.find()
+[
+  {
+    _id: ObjectId('675a54ad40ebedf6a586b025'),
+    title: 'post1',
+    author: 'Raj',
+    comments: [ 101, 103, 108 ]
+  },
+  {
+    _id: ObjectId('675a54b840ebedf6a586b026'),
+    title: 'post2',
+    author: 'Rohan',
+    comments: [ 102, 104 ]
+  },
+  {
+    _id: ObjectId('675a54c140ebedf6a586b027'),
+    title: 'post3',
+    author: 'Sneha',
+    comments: [ 105 ]
+  },
+  {
+    _id: ObjectId('675a54cf40ebedf6a586b028'),
+    title: 'post4',
+    author: 'Ayan',
+    comments: [ 106, 107 ]
+  }
+]
+aitrelationdb>

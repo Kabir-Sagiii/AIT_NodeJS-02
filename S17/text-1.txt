@@ -1,0 +1,46 @@
+
+todaysDB> db.users.find()
+[
+  {
+    _id: ObjectId('6758fd2260fac98cab86b01d'),
+    name: 's1',
+    city: 'hyd'
+  },
+  {
+    _id: ObjectId('6758fd2260fac98cab86b01e'),
+    name: 's2',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('6758fd2260fac98cab86b01f'),
+    name: 'S3',
+    city: 'mumbai'
+
+todaysDB> db.users.updateOne({_id:ObjectId('6758fd2260fac98cab86b01f')},{$set:{gender:"male"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+todaysDB> db.users.find()
+[
+  {
+    _id: ObjectId('6758fd2260fac98cab86b01d'),
+    name: 's1',
+    city: 'hyd'
+  },
+  {
+    _id: ObjectId('6758fd2260fac98cab86b01e'),
+    name: 's2',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('6758fd2260fac98cab86b01f'),
+    name: 's3',
+    city: 'Indore',
+    gender: 'male'
+  }
+]
+todaysDB>

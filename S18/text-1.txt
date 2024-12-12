@@ -1,0 +1,165 @@
+
+test> use aitrelationdb
+switched to db aitrelationdb
+aitrelationdb> db.createCollection("basicinfo")
+{ ok: 1 }
+aitrelationdb> db.createCollection("contactinfo")
+{ ok: 1 }
+aitrelationdb> db.basicinfo.insertMany([{name:"shiva",gender:"male",city:"hyd"},{name:"shree",gender:"male",city:"pune"},{name:"priya",gender:"female",city:"banglore"},{name:"riya",gender:"female",city:"mumbai"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('675a4f0e40ebedf6a586b01d'),
+    '1': ObjectId('675a4f0e40ebedf6a586b01e'),
+    '2': ObjectId('675a4f0e40ebedf6a586b01f'),
+    '3': ObjectId('675a4f0e40ebedf6a586b020')
+  }
+}
+aitrelationdb> db.contactinfo.insertMany([{email:"shiva@gmail.com",phone:9999999999},{email:"shree@gmail.com",phone:8888888888},{email:"priya@gmail.com",phone:77777777777},{email:"riya@gmail.com",phone:6666666666}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('675a4fa840ebedf6a586b021'),
+    '1': ObjectId('675a4fa840ebedf6a586b022'),
+    '2': ObjectId('675a4fa840ebedf6a586b023'),
+    '3': ObjectId('675a4fa840ebedf6a586b024')
+  }
+}
+aitrelationdb> db.basicinfo.updateOne({name:"shiva"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b021')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.find()
+[
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01d'),
+    name: 'shiva',
+    gender: 'male',
+    city: 'hyd',
+    contactId: ObjectId('675a4fa840ebedf6a586b021')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01e'),
+    name: 'shree',
+    gender: 'male',
+    city: 'pune'
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01f'),
+    name: 'priya',
+    gender: 'female',
+    city: 'banglore'
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b020'),
+    name: 'riya',
+    gender: 'female',
+    city: 'mumbai'
+  }
+]
+aitrelationdb> db.contactinfo.find()
+[
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b021'),
+    email: 'shiva@gmail.com',
+    phone: 9999999999
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b022'),
+    email: 'shree@gmail.com',
+    phone: 8888888888
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b023'),
+    email: 'priya@gmail.com',
+    phone: 77777777777
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b024'),
+    email: 'riya@gmail.com',
+    phone: 6666666666
+  }
+]
+aitrelationdb> db.basicinfo.updateOne({name:"shree"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b022')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.updateOne({name:"priya"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b023')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.updateOne({name:"riya"},{$set:{contactId:ObjectId('675a4fa840ebedf6a586b024')}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+aitrelationdb> db.basicinfo.find()
+[
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01d'),
+    name: 'shiva',
+    gender: 'male',
+    city: 'hyd',
+    contactId: ObjectId('675a4fa840ebedf6a586b021')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01e'),
+    name: 'shree',
+    gender: 'male',
+    city: 'pune',
+    contactId: ObjectId('675a4fa840ebedf6a586b022')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01f'),
+    name: 'priya',
+    gender: 'female',
+    city: 'banglore',
+    contactId: ObjectId('675a4fa840ebedf6a586b023')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b020'),
+    name: 'riya',
+    gender: 'female',
+    city: 'mumbai',
+    contactId: ObjectId('675a4fa840ebedf6a586b024')
+  }
+]
+aitrelationdb> db.contactinfo.find()
+[
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b021'),
+    email: 'shiva@gmail.com',
+    phone: 9999999999
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b022'),
+    email: 'shree@gmail.com',
+    phone: 8888888888
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b023'),
+    email: 'priya@gmail.com',
+    phone: 77777777777
+  },
+  {
+    _id: ObjectId('675a4fa840ebedf6a586b024'),
+    email: 'riya@gmail.com',
+    phone: 6666666666
+  }
+]
+aitrelationdb>
