@@ -1,0 +1,115 @@
+
+aitrelationdb> show collections
+basicinfo
+comments
+contactinfo
+orderd
+orders
+posts
+products
+aitrelationdb> db.orders.insertOne({orderNum:101,products:[1,3,5],user:"raj"})
+{
+
+
+aitrelationdb> show collections
+basicinfo
+comments
+contactinfo
+orderd
+orders
+posts
+products
+aitrelationdb> db.basicinfo
+aitrelationdb.basicinfo
+
+aitrelationdb> db.basicinfo.find()
+[
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01d'),
+    name: 'shiva',
+    gender: 'male',
+    city: 'hyd',
+    contactId: ObjectId('675a4fa840ebedf6a586b021')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01e'),
+    name: 'shree',
+    gender: 'male',
+    city: 'pune',
+    contactId: ObjectId('675a4fa840ebedf6a586b022')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01f'),
+    name: 'priya',
+    gender: 'female',
+    city: 'banglore',
+    contactId: ObjectId('675a4fa840ebedf6a586b023')
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b020'),
+    name: 'riya',
+    gender: 'female',
+    city: 'mumbai',
+    contactId: ObjectId('675a4fa840ebedf6a586b024')
+  }
+]
+aitrelationdb> db.basicinfo.aggregate({$lookup:{from:"contactinfo",localField:"contactId",foreignField:"_id",as:"contactinfo"}})
+[
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01d'),
+    name: 'shiva',
+    gender: 'male',
+    city: 'hyd',
+    contactId: ObjectId('675a4fa840ebedf6a586b021'),
+    contactinfo: [
+      {
+        _id: ObjectId('675a4fa840ebedf6a586b021'),
+        email: 'shiva@gmail.com',
+        phone: 9999999999
+      }
+    ]
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01e'),
+    name: 'shree',
+    gender: 'male',
+    city: 'pune',
+    contactId: ObjectId('675a4fa840ebedf6a586b022'),
+    contactinfo: [
+      {
+        _id: ObjectId('675a4fa840ebedf6a586b022'),
+        email: 'shree@gmail.com',
+        phone: 8888888888
+      }
+    ]
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b01f'),
+    name: 'priya',
+    gender: 'female',
+    city: 'banglore',
+    contactId: ObjectId('675a4fa840ebedf6a586b023'),
+    contactinfo: [
+      {
+        _id: ObjectId('675a4fa840ebedf6a586b023'),
+        email: 'priya@gmail.com',
+        phone: 77777777777
+      }
+    ]
+  },
+  {
+    _id: ObjectId('675a4f0e40ebedf6a586b020'),
+    name: 'riya',
+    gender: 'female',
+    city: 'mumbai',
+    contactId: ObjectId('675a4fa840ebedf6a586b024'),
+    contactinfo: [
+      {
+        _id: ObjectId('675a4fa840ebedf6a586b024'),
+        email: 'riya@gmail.com',
+        phone: 6666666666
+      }
+    ]
+  }
+]
+aitrelationdb>
